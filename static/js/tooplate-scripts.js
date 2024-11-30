@@ -141,7 +141,9 @@ function drawBarChart() {
               "#3889FC",
               "#fc3890",
               "#fc9038",
-              "#fc38db"
+              "#fc38db",
+              "#38d8fc",
+              "#4c38fc"
             ],
             borderWidth: 0
           }
@@ -220,7 +222,9 @@ function drawBarChart_v() {
               "#3889FC",
               "#fc3890",
               "#fc9038",
-              "#fc38db"
+              "#fc38db",
+              "#38d8fc",
+              "#4c38fc"
             ],
             borderWidth: 0
           }
@@ -302,7 +306,9 @@ function drawBarChart_vp() {
                "#3889FC",
                "#fc3890",
                "#fc9038",
-               "#fc38db"
+               "#fc38db",
+               "#38d8fc",
+               "#4c38fc"
              ],
              borderWidth: 0
            }
@@ -346,7 +352,7 @@ function drawPieChart() {
           {
             // data: [18.24, 6.5, 9.15],
            data: chart_data.payment_methods.data,
-            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db"],
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db", "#38d8fc", "#4c38fc"],
             // label: "Storage"
            label: chart_data.payment_methods.label
           }
@@ -396,7 +402,7 @@ function drawDoughnutChart() {
           {
             // data: [18.24, 6.5, 9.15],
            data: chart_data.sales_by_gender.data,
-            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db"],
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db", "#38d8fc", "#4c38fc"],
             // label: "Storage"
            label: chart_data.sales_by_gender.label
           }
@@ -445,7 +451,7 @@ function drawDoughnutChart2() {
         datasets: [
           {
            data: chart_data.ad_fan_page.data,
-            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db"],
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db", "#38d8fc", "#4c38fc"],
            label: chart_data.ad_fan_page.label
           }
         ],
@@ -500,7 +506,9 @@ function drawPolarChart() {
               "#3889FC",
               "#fc3890",
               "#fc9038",
-              "#fc38db"
+              "#fc38db",
+              "#38d8fc",
+              "#4c38fc"
             ],
             // label: "Storage"
            label: chart_data.product_line_by_total_sales.label
