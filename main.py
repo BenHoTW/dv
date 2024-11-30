@@ -22,11 +22,13 @@ app = FastAPI()
 # )
 
 # download dataset from here
-df: DataFrame = pd.read_csv("supermarket_sales.csv")
+# df: DataFrame = pd.read_csv("supermarket_sales.csv")
+#
+# df["Date"] = pd.to_datetime(df["Date"], format="%m/%d/%Y")
+#
+# df["Hour"] = pd.to_datetime(df["Time"], format="%H:%M").dt.hour
 
-df["Date"] = pd.to_datetime(df["Date"], format="%m/%d/%Y")
-
-df["Hour"] = pd.to_datetime(df["Time"], format="%H:%M").dt.hour
+df: DataFrame = pd.read_csv("demo_data.csv")
 
 #掛載static資料夾來處理靜態網頁
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -37,7 +39,8 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def read_root(request: Request):
     # data = {"title": "我的網站", "user": "Ben Ho"}
-    data = await read_data()
+    # data = await read_data()
+    data = await read_demo_data()
     #傳遞 request 物件到模板，以供 Jinja2 使用
     # return templates.TemplateResponse("02_index.html", {"request": request})
     return templates.TemplateResponse("index.html", {"request": request, "data": data})
@@ -66,7 +69,6 @@ async def get_shooping_hour_data():
         final_shopping_time_data[index] = result
 
     return final_shopping_time_data
-
 
 @app.get("/data")
 async def read_data():
@@ -115,6 +117,78 @@ async def read_data():
 @app.get("/keep-alive")
 def default_index():
     return "running"
+
+
+async def univariate_data_analysis_count(groupby: str, interested_column: str, rows:int=10, title: str=''):
+  groupby_data = df.groupby(groupby)[interested_column].count().sort_values(ascending=False)
+  groupby_data
+  label_names = groupby_data.index.tolist()[:rows]
+  label_names
+
+  data = groupby_data.values.tolist()[:rows]
+  data
+  return_data = {"labels": label_names, "data": data, "label": title}
+  return return_data
+
+@app.get("/demo_data")
+async def read_demo_data():
+    # sales per branch
+    total_sales_per_branch = await univariate_data_analysis_count("scan_records_second_layer_notes", "scan_records_second_layer_notes", 6, "詐欺方式(前六名)")
+
+    # sale by gender
+    sales_by_gender = await univariate_data_analysis_count("scan_records_keyword_group_2", "scan_records_keyword_group_2", 12, "詐欺網頁關鍵字(前12個)")
+    # return sales_by_gender
+
+    # gross profit by branch
+    # gross_income_data = await univariate_data_analysis_count("scan_records_type_0", "scan_records_type_0", 6, "Gross Profit By Branch")
+
+    # product line by sales
+    product_line_by_total_sales = await univariate_data_analysis_count("scan_records_fan_page_name", "scan_records_fan_page_name", 10, "假冒粉絲頁(前十名)")
+
+    # product line by gross profit
+    product_line_by_gross_income= await univariate_data_analysis_count("scan_records_second_layer_notes", "scan_records_second_layer_notes", 10, "詐欺方式(前十名)")
+
+    # product line by rating
+    # product_line_by_rating = await univariate_data_analysis_count("scan_records_type_0", "scan_records_type_0", 6, "Product Line By Rating")
+
+    # payment method
+    payment_methods = await univariate_data_analysis_count("scan_records_ad_page_title1", "scan_records_ad_page_title1", 6, "詐欺廣告標題(前六名)")
+
+    # product line by quantity
+    product_line_by_quantity = await univariate_data_analysis_count("scan_records_type_0", "scan_records_type_0", 10, "詐欺產品與服務種類(前十名)")
+
+    # busy hours data
+    # shooping_hour_data = await get_shooping_hour_data()
+    shooping_hour_data = ''
+    # ad_fan_page = {"labels": ["分部 A", "分部 B", "分部 C"], "label": "各分部每個時段的交易筆數"}
+    ad_fan_page = {
+        "labels": [
+            "假冒粉絲頁",
+            "詐欺廣告"
+        ],
+        "data": [
+            48,
+            52
+        ],
+        "label": "假冒粉絲頁 與 詐欺廣告 比例"
+    }
+
+    # return {"data": {
+
+    return {
+        "total_sales_per_branch": total_sales_per_branch,
+        "sales_by_gender": sales_by_gender,
+        # "gross_income_data": gross_income_data,
+        "product_line_by_total_sales": product_line_by_total_sales,
+        "product_line_by_gross_income": product_line_by_gross_income,
+        # "product_line_by_rating": product_line_by_rating,
+        "payment_methods": payment_methods,
+        "product_line_by_quantity": product_line_by_quantity,
+        "shooping_hour_data": shooping_hour_data,
+        "ad_fan_page": ad_fan_page
+    }
+
+    # }}
 
 if __name__ == '__main__':
     uvicorn.run("main:app", reload=True)

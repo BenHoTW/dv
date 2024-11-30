@@ -138,7 +138,10 @@ function drawBarChart() {
               "#D7D768",
               "#9D66CC",
               "#DB9C3F",
-              "#3889FC"
+              "#3889FC",
+              "#fc3890",
+              "#fc9038",
+              "#fc38db"
             ],
             borderWidth: 0
           }
@@ -214,7 +217,10 @@ function drawBarChart_v() {
               "#D7D768",
               "#9D66CC",
               "#DB9C3F",
-              "#3889FC"
+              "#3889FC",
+              "#fc3890",
+              "#fc9038",
+              "#fc38db"
             ],
             borderWidth: 0
           }
@@ -293,7 +299,10 @@ function drawBarChart_vp() {
                "#D7D768",
                "#9D66CC",
                "#DB9C3F",
-               "#3889FC"
+               "#3889FC",
+               "#fc3890",
+               "#fc9038",
+               "#fc38db"
              ],
              borderWidth: 0
            }
@@ -337,7 +346,7 @@ function drawPieChart() {
           {
             // data: [18.24, 6.5, 9.15],
            data: chart_data.payment_methods.data,
-            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582"],
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db"],
             // label: "Storage"
            label: chart_data.payment_methods.label
           }
@@ -387,7 +396,7 @@ function drawDoughnutChart() {
           {
             // data: [18.24, 6.5, 9.15],
            data: chart_data.sales_by_gender.data,
-            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582"],
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db"],
             // label: "Storage"
            label: chart_data.sales_by_gender.label
           }
@@ -403,6 +412,49 @@ function drawDoughnutChart() {
     };
 
     doughnutChart = new Chart(ctxDoughnut, configDoughnut);
+  }
+}
+
+function drawDoughnutChart2() {
+  if ($("#doughnutChart2").length) {
+    var chartHeight = 300;
+
+    $("#doughnutChartContainer2").css("height", chartHeight + "px");
+
+    ctxDoughnut2 = document.getElementById("doughnutChart2").getContext("2d");
+
+    optionsDoughnut2 = {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 10,
+          top: 10,
+          bottom: 10
+        }
+      },
+      legend: {
+        position: "top"
+      }
+    };
+
+    configDoughnut2 = {
+      type: "doughnut",
+      data: {
+        datasets: [
+          {
+           data: chart_data.ad_fan_page.data,
+            backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582", "#D7D768", "#9D66CC", "#DB9C3F", "#3889FC", "#fc3890", "#fc9038", "#fc38db"],
+           label: chart_data.ad_fan_page.label
+          }
+        ],
+       labels: chart_data.ad_fan_page.labels
+      },
+      options: optionsDoughnut2
+    };
+
+    doughnutChart2 = new Chart(ctxDoughnut2, configDoughnut2);
   }
 }
 
@@ -445,7 +497,10 @@ function drawPolarChart() {
               "#D7D768",
               "#9D66CC",
               "#DB9C3F",
-              "#3889FC"
+              "#3889FC",
+              "#fc3890",
+              "#fc9038",
+              "#fc38db"
             ],
             // label: "Storage"
            label: chart_data.product_line_by_total_sales.label

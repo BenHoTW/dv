@@ -19,7 +19,7 @@
     <div class="" id="home">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                        <h1 class="tm-site-title mb-0">銷售資訊</h1>
+                        <h1 class="tm-site-title mb-0">廣告掃描資訊</h1>
             </div>
 
         </nav>
@@ -31,24 +31,43 @@
             </div>
             <!-- row -->
             <div class="row tm-content-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block">
-                        <h2 class="tm-block-title">{{data.shooping_hour_data.label}}</h2>
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
+<!--                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">-->
+<!--                    <div class="tm-bg-primary-dark tm-block">-->
+<!--                        <h2 class="tm-block-title">{{data.shooping_hour_data.label}}</h2>-->
+<!--                        <canvas id="lineChart"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                temp -->
+<!--                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">-->
+<!--                    <div class="tm-bg-primary-dark tm-block">-->
+<!--                        <h2 class="tm-block-title">{{data.product_line_by_quantity.label}}</h2>-->
+<!--&lt;!&ndash;                        <canvas id="barChart"></canvas>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                temp -->
+
+               <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                   <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                       <h2 class="tm-block-title">{{data.ad_fan_page.label}}</h2>
+                       <div id="doughnutChartContainer2">
+                           <canvas id="doughnutChart2" class="chartjs-render-monitor" width="200" height="200"></canvas>
+                       </div>
+                   </div>
+               </div>
+
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block">
                         <h2 class="tm-block-title">{{data.product_line_by_quantity.label}}</h2>
                         <canvas id="barChart"></canvas>
                     </div>
                 </div>
+
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller">
                         <h2 class="tm-block-title">{{data.payment_methods.label}}</h2>
                         <div id="pieChartContainer">
                             <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
@@ -57,6 +76,7 @@
                         <canvas id="barChart_v"></canvas>
                     </div>
                 </div>
+
                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                    <div class="tm-bg-primary-dark tm-block tm-block-taller">
                        <h2 class="tm-block-title">{{data.sales_by_gender.label}}</h2>
@@ -65,7 +85,7 @@
                        </div>
                    </div>
                </div>
-                
+
                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller">
                         <h2 class="tm-block-title">{{data.product_line_by_total_sales.label}}</h2>
@@ -107,6 +127,7 @@
             ctxBar_vp,
             ctxPie,
             ctxDoughnut,
+            ctxDoughnut2,
             ctxPolar,
             optionsLine,
             optionsBar,
@@ -114,6 +135,7 @@
             optionsBar_vp,
             optionsPie,
             optionsDoughnut,
+            optionsDoughnut2,
             optionsPolar,
             configLine,
             configBar,
@@ -121,6 +143,7 @@
             configBar_vp,
             configPie,
             configDoughnut,
+            configDoughnut2,
             configPolar,
             lineChart,
             barChart,
@@ -128,6 +151,7 @@
             barChart_vp,
             pieChart,
             doughnutChart,
+            doughnutChart2,
             polarChart;
         // DOM is ready
         $(function () {
@@ -137,6 +161,7 @@
             drawBarChart_vp(); // Bar Chart
             drawPieChart(); // Pie Chart
             drawDoughnutChart(); // Doughnut Chart
+            drawDoughnutChart2(); // Doughnut Chart
             drawPolarChart(); // Polar Area Chart
 
             $(window).resize(function () {
